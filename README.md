@@ -90,7 +90,7 @@ A rede é distribuída em **duas Zonas de Disponibilidade**, cada uma com uma su
 
 | Dia | Tema | Documentação |
 |-----|------|--------------|
-| 1 | Construindo a Base | [Dia 1](docs/dia-1/README.md) |
+| 1 | Construindo a Base | [Dia 1](docs/dia-1/README.md) (concluído) |
 | 2 | Segurança e Escalabilidade | Em breve |
 | 3 | Observabilidade e Operação | Em breve |
 
@@ -98,10 +98,10 @@ A rede é distribuída em **duas Zonas de Disponibilidade**, cada uma com uma su
 
 Guia completo: [docs/dia-1/README.md](docs/dia-1/README.md)
 
-- [ ] Instâncias EC2: 2 de frontend e 2 de backend
-- [ ] Application Load Balancer na frente do frontend
-- [ ] Tabela Amazon DynamoDB
-- [ ] Fila Amazon SQS para receber as requisições do frontend
+- [x] Instâncias EC2: 2 de frontend e 2 de backend
+- [x] Application Load Balancer na frente do frontend
+- [x] Tabela Amazon DynamoDB
+- [x] Fila Amazon SQS para receber as requisições do frontend
 
 ### Dia 2 — Segurança e Escalabilidade
 

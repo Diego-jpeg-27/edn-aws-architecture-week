@@ -24,9 +24,6 @@ Este padrão é comum em aplicações legadas, em processamentos que levam vári
    - [6. Target Group](#6-target-group)
    - [7. Application Load Balancer](#7-application-load-balancer)
    - [8. Instâncias de backend](#8-instâncias-de-backend)
-7. [Validação](#validação)
-8. [Preparação para o Dia 2](#preparação-para-o-dia-2)
-9. [Solução de problemas](#solução-de-problemas)
 
 ---
 
@@ -194,6 +191,8 @@ Antes de colar o script no campo **Dados do usuário** (em **Detalhes avançados
 
 A aplicação Flask escuta na porta 80 e roda como serviço do systemd (`frontend-app.service`).
 
+> Os scripts deste repositório não seguem a numeração de linhas do PDF do laboratório. Localize os marcadores pela busca do editor (Ctrl+F): `<SUA_REGIAO>` e `<URL_DA_FILA_SQS>`. Faça a substituição em uma cópia fora do repositório, pois a URL da fila contém o ID da conta AWS.
+
 ### 6. Target Group
 
 Console AWS > **EC2** > **Balanceamento de carga** > **Grupos de destino** > **Criar grupo de destino**.
@@ -274,12 +273,3 @@ Envie mais 1 ou 2 requisições pela página e confirme que elas aparecem na tab
 
 Mantenha a tabela, a fila, os Security Groups, a IAM Role, o Target Group e o ALB.
 
-## Solução de problemas
-
-| Sintoma | Causa provável |
-|---------|----------------|
-| Destinos **Unhealthy** no Target Group | O `ec2-sg` não permite HTTP vindo do `loadbalancer-sg`, ou a instância está sem Security Group |
-| Página não abre | Use `http://` em vez de `https://`. Alguns navegadores bloqueiam acesso via HTTP |
-| Erro ao enviar requisição | Região ou URL da fila incorretas no `frontend.sh`, ou IAM Role não associada à instância |
-| Mensagens acumulando na fila | Região, URL da fila ou nome da tabela incorretos no `backend.sh` |
-| Instância sem acesso aos pacotes ou à AWS | Sub-rede privada sem rota para o NAT Gateway |
