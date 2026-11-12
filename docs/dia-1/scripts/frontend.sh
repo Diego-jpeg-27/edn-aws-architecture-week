@@ -28,34 +28,82 @@ HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Frontend Web Application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Semana de Arquitetura AWS | Escola da Nuvem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background-color: #f5f5f5; }
-        .container { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h1 { color: #333; text-align: center; }
-        form { margin-top: 20px; }
-        label { display: block; margin-bottom: 5px; color: #666; }
-        input[type="text"] { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        button:hover { background-color: #0056b3; }
-        .message { margin-top: 20px; padding: 15px; border-radius: 4px; text-align: center; }
-        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        :root { --navy: #00102e; --cyan: #19c3d6; --sky: #3aa6e8; --paper: #f3f6fa; --ink: #0d1b33; --muted: #4c5a73; }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 system-ui, "Segoe UI", Roboto, sans-serif; }
+        a:focus-visible, input:focus-visible, button:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+        .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+        .hero { background: var(--navy); color: #fff; padding: 32px 0 56px; overflow: hidden; }
+        .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+        .site { color: #fff; font-size: 15px; text-decoration: none; border-bottom: 1px solid var(--cyan); padding-bottom: 2px; }
+        .site:hover { color: var(--cyan); }
+
+        .logo { position: relative; display: inline-block; font: 600 30px/0.95 Sora, sans-serif; letter-spacing: -0.02em; }
+        .logo span { display: block; }
+        .logo { padding-right: 34px; }
+        .logo svg { position: absolute; left: 42px; top: 20px; width: 96px; height: 62px; overflow: visible; }
+        .cloud { fill: none; stroke: url(#g); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s cubic-bezier(.6,0,.2,1) .3s forwards; }
+        .dot { font-style: normal; color: var(--cyan); opacity: 0; animation: pop .3s ease-out 1.8s forwards; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        @keyframes pop { to { opacity: 1; } }
+
+        .hero h1 { font: 600 clamp(32px, 6vw, 52px)/1.08 Sora, sans-serif; letter-spacing: -0.03em; margin: 56px 0 12px; max-width: 14ch; }
+        .hero p { margin: 0; max-width: 52ch; color: #b9c6e4; }
+
+        main.wrap { padding-top: 40px; padding-bottom: 64px; }
+        h2 { font: 600 20px/1.3 Sora, sans-serif; margin: 0 0 4px; }
+        .hint { margin: 0 0 20px; color: var(--muted); }
+        label { display: block; font-weight: 600; margin-bottom: 6px; }
+        .row { display: flex; gap: 10px; flex-wrap: wrap; }
+        input[type="text"] { flex: 1 1 280px; padding: 12px 14px; font-size: 16px; color: var(--ink); background: #fff; border: 1.5px solid #c5cfdf; border-radius: 6px; }
+        input[type="text"]:hover { border-color: var(--sky); }
+        button { padding: 12px 22px; font: 600 16px Sora, sans-serif; color: var(--navy); background: var(--cyan); border: 0; border-radius: 6px; cursor: pointer; }
+        button:hover { background: #4fd3e2; }
+        .message { margin-top: 20px; padding: 12px 14px; border-left: 4px solid; background: #fff; word-break: break-word; }
+        .success { border-color: #1f9d55; color: #155c34; }
+        .error { border-color: #c53030; color: #8a1f1f; }
+
+        @media (prefers-reduced-motion: reduce) { .cloud, .dot { animation: none; stroke-dashoffset: 0; opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Frontend Web Application</h1>
-        <p style="text-align: center; color: #666;">Submit data to process via SQS queue</p>
+    <header class="hero">
+        <div class="wrap">
+            <div class="top">
+                <div class="logo" role="img" aria-label="Escola da Nuvem">
+                    <span>escola</span><span>da</span><span>nuvem<i class="dot">.</i></span>
+                    <svg viewBox="0 0 96 62" aria-hidden="true">
+                        <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#19c3d6"/><stop offset="1" stop-color="#3aa6e8"/></linearGradient></defs>
+                        <path class="cloud" pathLength="1" d="M18 40 A14 14 0 0 1 34 20 A22 22 0 0 1 74 24 A16 16 0 0 1 78 58"/>
+                    </svg>
+                </div>
+                <a class="site" href="https://mkt.escoladanuvem.org/" target="_blank" rel="noopener">Conheça a Escola da Nuvem</a>
+            </div>
+            <h1>Semana de Arquitetura AWS</h1>
+            <p>Envie um texto. O frontend o coloca na fila SQS, o backend lê a fila e grava o registro no DynamoDB.</p>
+        </div>
+    </header>
+    <main class="wrap">
+        <h2>Nova requisição</h2>
+        <p class="hint">Qualquer texto serve para testar o fluxo completo.</p>
         <form method="POST" action="/submit">
-            <label for="data">Enter your data:</label>
-            <input type="text" id="data" name="data" required placeholder="Enter any text to process">
-            <button type="submit">Submit Request</button>
+            <label for="data">Texto</label>
+            <div class="row">
+                <input type="text" id="data" name="data" required placeholder="Ex.: teste do dia 1">
+                <button type="submit">Enviar para a fila</button>
+            </div>
         </form>
         {% if message %}
-        <div class="message {{ message_type }}">{{ message }}</div>
+        <div class="message {{ message_type }}" role="status">{{ message }}</div>
         {% endif %}
-    </div>
+    </main>
 </body>
 </html>
 '''
@@ -108,6 +156,7 @@ EOF
 
 systemctl daemon-reload
 systemctl enable frontend-app.service
-systemctl start frontend-app.service
+# restart (e não start) para aplicar o novo app.py se o script rodar de novo numa instância existente
+systemctl restart frontend-app.service
 
 echo "Frontend application installed and started successfully"
