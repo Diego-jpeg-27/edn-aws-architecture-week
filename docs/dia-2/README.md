@@ -377,4 +377,4 @@ A prefix list libera qualquer distribuição CloudFront, inclusive de outras con
    - Ação padrão: **Retornar resposta fixa**, código **403**.
    - Nova regra: *se* o cabeçalho `X-Origin-Verify` for igual ao valor, *então* encaminhar para `grupo-frontend-<nome>`.
 
-Esse reforço é tema do Dia 3.
+O [Dia 3](../dia-3/README.md) aplica a prefix list como parte do roteiro; o cabeçalho secreto segue como reforço opcional.

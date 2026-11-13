@@ -92,7 +92,7 @@ A rede é distribuída em **duas Zonas de Disponibilidade**, cada uma com uma su
 |-----|------|--------------|
 | 1 | Construindo a Base | [Dia 1](docs/dia-1/README.md) (concluído) |
 | 2 | Segurança e Escalabilidade | [Dia 2](docs/dia-2/README.md) |
-| 3 | Observabilidade e Operação | Em breve |
+| 3 | Observabilidade e Operação | [Dia 3](docs/dia-3/README.md) |
 
 ### Dia 1 — Construindo a Base
 
@@ -116,10 +116,14 @@ Guia completo: [docs/dia-2/README.md](docs/dia-2/README.md)
 
 A arquitetura já existe; o foco é operá-la: monitorar, provocar falhas, corrigir lacunas e garantir resiliência de dados e custo.
 
+Guia completo: [docs/dia-3/README.md](docs/dia-3/README.md)
+
 - [ ] CloudWatch Dashboard unificado
 - [ ] Restringir o acesso ao ALB somente via CloudFront
 - [ ] Alertas por e-mail com SNS
 - [ ] Escalabilidade do backend por backlog de mensagens SQS por instância (não por CPU)
+- [ ] Point-in-Time Recovery no DynamoDB
+- [ ] Cost Anomaly Detection
 
 ## Fluxo da Requisição
 
@@ -144,16 +148,20 @@ edn-aws-architecture-week/
 ├── README.md
 └── docs/
     ├── dia-1/
+    │   ├── README.md          # guia completo do laboratório
+    │   ├── img/               # diagramas antes e depois
+    │   └── scripts/
+    │       ├── frontend.sh    # user data das instâncias de frontend
+    │       └── backend.sh     # user data das instâncias de backend
+    ├── dia-2/
+    │   ├── README.md          # guia completo do laboratório
+    │   └── scripts/
+    │       ├── frontend.sh    # user data do Launch Template de frontend (lê o Parameter Store)
+    │       └── backend.sh     # user data do Launch Template de backend (lê o Parameter Store)
+    └── dia-3/
         ├── README.md          # guia completo do laboratório
-        ├── img/               # diagramas antes e depois
         └── scripts/
-            ├── frontend.sh    # user data das instâncias de frontend
-            └── backend.sh     # user data das instâncias de backend
-    └── dia-2/
-        ├── README.md          # guia completo do laboratório
-        └── scripts/
-            ├── frontend.sh    # user data do Launch Template de frontend (lê o Parameter Store)
-            └── backend.sh     # user data do Launch Template de backend (lê o Parameter Store)
+            └── metrica-backlog.json  # métrica de backlog por instância (target tracking)
 ```
 
 ## Resultados Esperados
