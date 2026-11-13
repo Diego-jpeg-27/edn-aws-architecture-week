@@ -91,7 +91,7 @@ A rede é distribuída em **duas Zonas de Disponibilidade**, cada uma com uma su
 | Dia | Tema | Documentação |
 |-----|------|--------------|
 | 1 | Construindo a Base | [Dia 1](docs/dia-1/README.md) (concluído) |
-| 2 | Segurança e Escalabilidade | Em breve |
+| 2 | Segurança e Escalabilidade | [Dia 2](docs/dia-2/README.md) |
 | 3 | Observabilidade e Operação | Em breve |
 
 ### Dia 1 — Construindo a Base
@@ -105,9 +105,11 @@ Guia completo: [docs/dia-1/README.md](docs/dia-1/README.md)
 
 ### Dia 2 — Segurança e Escalabilidade
 
+Guia completo: [docs/dia-2/README.md](docs/dia-2/README.md)
+
 - [ ] Parameter Store para remover segredos do código
 - [ ] Session Manager para acesso sem SSH
-- [ ] Auto Scaling Groups para frontend e backend
+- [ ] Launch Templates e Auto Scaling Groups para frontend e backend
 - [ ] CloudFront e Dead Letter Queue (DLQ)
 
 ### Dia 3 — Observabilidade e Operação
@@ -141,12 +143,17 @@ A arquitetura já existe; o foco é operá-la: monitorar, provocar falhas, corri
 edn-aws-architecture-week/
 ├── README.md
 └── docs/
-    └── dia-1/
+    ├── dia-1/
         ├── README.md          # guia completo do laboratório
         ├── img/               # diagramas antes e depois
         └── scripts/
             ├── frontend.sh    # user data das instâncias de frontend
             └── backend.sh     # user data das instâncias de backend
+    └── dia-2/
+        ├── README.md          # guia completo do laboratório
+        └── scripts/
+            ├── frontend.sh    # user data do Launch Template de frontend (lê o Parameter Store)
+            └── backend.sh     # user data do Launch Template de backend (lê o Parameter Store)
 ```
 
 ## Resultados Esperados
