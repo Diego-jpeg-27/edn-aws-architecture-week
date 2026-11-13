@@ -1,0 +1,42 @@
+{
+  "CustomizedMetricSpecification": {
+    "Metrics": [
+      {
+        "Id": "e1",
+        "Expression": "m1 / m2",
+        "Label": "Backlog por instancia",
+        "ReturnData": true
+      },
+      {
+        "Id": "m1",
+        "MetricStat": {
+          "Metric": {
+            "Namespace": "AWS/SQS",
+            "MetricName": "ApproximateNumberOfMessagesVisible",
+            "Dimensions": [
+              { "Name": "QueueName", "Value": "fila-registros-<NOME>" }
+            ]
+          },
+          "Stat": "Sum"
+        },
+        "Label": "Quantidade de mensagens disponiveis",
+        "ReturnData": false
+      },
+      {
+        "Id": "m2",
+        "MetricStat": {
+          "Metric": {
+            "Namespace": "AWS/AutoScaling",
+            "MetricName": "GroupInServiceInstances",
+            "Dimensions": [
+              { "Name": "AutoScalingGroupName", "Value": "asg-backend-<NOME>" }
+            ]
+          },
+          "Stat": "Average"
+        },
+        "Label": "Quantidade de instancias em servico",
+        "ReturnData": false
+      }
+    ]
+  }
+}
