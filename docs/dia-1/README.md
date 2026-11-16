@@ -1,4 +1,5 @@
 # Dia 1 — Construindo a Base
+![Dia 1](../img/dia-1.svg)
 
 [Voltar ao README principal](../../README.md)
 

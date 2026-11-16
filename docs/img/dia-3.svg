@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="200" viewBox="0 0 1200 200" role="img" aria-label="Dia 3 — OBSERVABILIDADE E OPERAÇÃO">
+  <rect width="1200" height="200" fill="#f3e6c8"/>
+  <g opacity="0.9">
+    <polygon points="1060,30 1200,-200 1500,30" fill="#a8d5c2"/>
+    <polygon points="1060,30 1500,30 1400,400" fill="#f2c9a0"/>
+    <polygon points="1060,30 1400,400 900,400" fill="#c9e0de"/>
+    <polygon points="1060,30 900,400 300,400" fill="#e3b46b"/>
+    <polygon points="1060,30 300,400 -200,300" fill="#a8d5c2"/>
+    <polygon points="1060,30 -200,300 -200,0" fill="#d8b98a"/>
+    <polygon points="1060,30 -200,0 300,-200" fill="#8fc1b0"/>
+    <polygon points="1060,30 300,-200 1200,-200" fill="#f2c9a0"/>
+  </g>
+  <g fill="none" stroke="#fbf5e6" opacity="0.55">
+    <circle cx="1060" cy="30" r="260" stroke-width="8"/>
+    <circle cx="1060" cy="30" r="560" stroke-width="8"/>
+  </g>
+  <g transform="translate(1060 30)">
+    <circle r="70" fill="#e9b949" opacity="0.5"/>
+    <circle r="44" fill="#f6dfa0"/>
+    <path d="M-31.1 31.1 A44 44 0 0 0 31.1 -31.1 Z" fill="#d9a24e"/>
+  </g>
+  <!-- console -->
+  <rect x="40" y="30" width="900" height="140" rx="6" fill="#a89878"/>
+  <rect x="47" y="36" width="886" height="128" rx="4" fill="#e3d9c0" stroke="#8a7d62"/>
+  <rect x="64" y="52" width="660" height="96" rx="4" fill="#2a2a22" stroke="#5a5040" stroke-width="3"/>
+  <g font-family="Consolas, 'Courier New', monospace" fill="#f0a830">
+    <text x="86" y="84" font-size="16" letter-spacing="4" opacity="0.8">PAINEL · DIA 3</text>
+    <text x="86" y="126" font-size="34" font-weight="700">OBSERVABILIDADE E OPERAÇÃO</text>
+  </g>
+  <!-- mostrador de progresso da semana -->
+  <g transform="translate(830 100)">
+    <circle r="40" fill="#3a3328"/><circle r="37" fill="#9c8f72"/>
+    <circle r="31" fill="#f4eee0" stroke="#5a5040"/>
+    <path d="M-24.25 14 A28 28 0 1 1 24.25 14" fill="none" stroke="#2b261d" stroke-width="7" stroke-dasharray="1.6 56.97"/>
+    <polygon points="-1.6,6 1.6,6 0.5,-25 -0.5,-25" fill="#b5321e" transform="rotate(120)"/>
+    <circle r="4" fill="#3a3328"/>
+    <text y="20" font-family="Consolas, monospace" font-size="9" text-anchor="middle" fill="#5a5040">3 / 3</text>
+  </g>
+</svg>

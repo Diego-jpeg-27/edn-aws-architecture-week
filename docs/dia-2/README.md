@@ -1,8 +1,15 @@
 # Dia 2 — Segurança e Escalabilidade
+![Dia 2](../img/dia-2.svg)
 
 [Voltar ao README principal](../../README.md) · [Dia 1](../dia-1/README.md)
 
-Evolução da arquitetura do Dia 1. Os valores de configuração saem do código e vão para o **Parameter Store**. O acesso às instâncias passa a ser feito pelo **Session Manager**. As instâncias fixas são substituídas por **Auto Scaling Groups**, o **CloudFront** passa a ser a porta de entrada e uma **Dead Letter Queue** guarda as mensagens que falham.
+Evolução da arquitetura do Dia 1. O que muda hoje:
+
+- Os valores de configuração saem do código e vão para o **Parameter Store**.
+- O acesso às instâncias passa a ser feito pelo **Session Manager**, sem SSH.
+- As instâncias fixas são substituídas por **Auto Scaling Groups**.
+- O **CloudFront** passa a ser a porta de entrada, com HTTPS.
+- Uma **Dead Letter Queue** guarda as mensagens que falham.
 
 ---
 

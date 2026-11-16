@@ -1,3 +1,5 @@
+![Semana de Arquitetura AWS](docs/img/banner.svg)
+
 # Semana de Arquitetura AWS — Escola da Nuvem
 
 Projeto prático de três dias para construir, do zero, uma arquitetura web de 3 camadas na AWS: segura, escalável e resiliente.
@@ -184,6 +186,7 @@ Ao final, remova os recursos para evitar cobranças, preferencialmente nesta ord
 5. Tabela DynamoDB
 6. NAT Gateways e Elastic IPs
 7. VPC, alarmes do CloudWatch, tópico SNS e parâmetros do Parameter Store
+8. Dashboard do CloudWatch e monitor do Cost Anomaly Detection
 
 ---
 

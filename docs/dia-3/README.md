@@ -1,8 +1,16 @@
 # Dia 3 — Observabilidade e Operação
+![Dia 3](../img/dia-3.svg)
 
 [Voltar ao README principal](../../README.md) · [Dia 1](../dia-1/README.md) · [Dia 2](../dia-2/README.md)
 
-A arquitetura já existe, já escala e já se recupera da queda de uma instância. Hoje quase nada novo é criado: o foco é **operar** o que existe. As métricas vão para um **dashboard no CloudWatch**, as falhas são provocadas de propósito e os alertas chegam por **e-mail via SNS**. O backend passa a escalar pelo **backlog da fila**, o ALB fica acessível **somente pelo CloudFront**, o DynamoDB ganha **backup contínuo** e os custos passam a ser vigiados pelo **Cost Anomaly Detection**.
+A arquitetura já existe, já escala e já se recupera da queda de uma instância. Hoje quase nada novo é criado: o foco é **operar** o que existe. O que muda hoje:
+
+- As métricas vão para um **dashboard no CloudWatch**.
+- As falhas são provocadas de propósito e os alertas chegam por **e-mail via SNS**.
+- O backend passa a escalar pelo **backlog da fila**, não mais pela CPU.
+- O ALB fica acessível **somente pelo CloudFront**.
+- O DynamoDB ganha **backup contínuo** (PITR).
+- Os custos passam a ser vigiados pelo **Cost Anomaly Detection**.
 
 ---
 
@@ -28,7 +36,7 @@ A arquitetura já existe, já escala e já se recupera da queda de uma instânci
    - [12. Point-in-Time Recovery no DynamoDB](#12-point-in-time-recovery-no-dynamodb)
    - [13. Cost Anomaly Detection](#13-cost-anomaly-detection)
 7. [Validação](#validação)
-8. [Limpeza](#limpeza)
+8. [Limpeza](../../README.md#limpeza-de-recursos)
 
 ---
 
@@ -157,7 +165,9 @@ Salve o dashboard. Os widgets podem ser movidos e redimensionados.
 
 ### 4. ALB somente via CloudFront
 
-Este é o desafio pendente do Dia 2. O `loadbalancer-sg-<nome>` libera a porta 80 para `0.0.0.0/0`: quem descobrir o DNS do ALB pula o CloudFront. É como ter uma portaria segura e deixar a porta lateral destrancada.
+Este é o desafio opcional do Dia 2. **Se você já fez o desafio, pule para o passo 5.**
+
+O `loadbalancer-sg-<nome>` libera a porta 80 para `0.0.0.0/0`: quem descobrir o DNS do ALB pula o CloudFront. É como ter uma portaria segura e deixar a porta lateral destrancada.
 
 A solução sem custo é a **managed prefix list** do CloudFront: uma lista de IPs mantida pela AWS.
 
@@ -384,26 +394,3 @@ Pela anomalia, abra o **Cost Explorer** e agrupe por serviço, região e tipo de
 | Teste de CPU | `CPUUtilization` do frontend acima de 60% e e-mail do alarme |
 | DynamoDB | PITR **Ativado** |
 | Cost Anomaly Detection | Monitor e assinatura criados |
-
-## Limpeza
-
-Último dia: remova tudo, nesta ordem, para evitar erros de dependência.
-
-1. **Cost Anomaly Detection:** exclua a assinatura `AnomalyAlerta-<nome>` e depois o monitor `Anomaly-lab-<nome>`.
-2. **CloudWatch:** exclua o dashboard e os alarmes `alarm-cpu-frontend-<nome>` e `alarm-dlq-<nome>`.
-3. **SNS:** exclua a assinatura de e-mail e o tópico `alertas-<nome>`.
-4. **CloudFront:** **Disable** na distribuição, aguarde e clique em **Delete**.
-5. **DynamoDB:** exclua `tabela-registros-<nome>`. Os backups do PITR expiram sozinhos.
-6. **SQS:** exclua `fila-registros-<nome>` e `dlq-registros-<nome>`.
-7. **Auto Scaling:** exclua `asg-frontend-<nome>` e `asg-backend-<nome>`.
-8. **Launch Templates:** exclua `Frontend-<nome>` e `Backend-<nome>`.
-9. **Load Balancer:** exclua `projeto-alb-<nome>`.
-10. **Target Group:** exclua `grupo-frontend-<nome>`.
-11. **Security Groups:** aguarde uns 5 minutos as instâncias encerrarem e exclua `loadbalancer-sg-<nome>` e `ec2-sg-<nome>`.
-12. **Parameter Store:** exclua os três parâmetros em `/projeto/<nome>/`.
-13. **IAM:** exclua a função `ec2-role-<nome>`.
-14. **CloudShell:** **Ações** > **Excluir**.
-
-A prefix list do CloudFront pertence à AWS: não exclua nada nela.
-
-> A VPC, os NAT Gateways e os Elastic IPs do [Dia 1](../dia-1/README.md) também geram cobrança. Se não forem mais usados, exclua os NAT Gateways, libere os Elastic IPs e exclua a `projeto-vpc`.
