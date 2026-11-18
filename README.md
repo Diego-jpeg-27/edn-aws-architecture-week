@@ -6,7 +6,6 @@ Projeto prático de três dias para construir, do zero, uma arquitetura web de 3
 
 ![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?logo=amazonwebservices&logoColor=white)
 ![Nível](https://img.shields.io/badge/n%C3%ADvel-intermedi%C3%A1rio-blue)
-![Status](https://img.shields.io/badge/status-em%20andamento-yellow)
 
 ---
 
@@ -21,7 +20,6 @@ Projeto prático de três dias para construir, do zero, uma arquitetura web de 3
 - [Pré-requisitos](#pré-requisitos)
 - [Estrutura do Repositório](#estrutura-do-repositório)
 - [Resultados Esperados](#resultados-esperados)
-- [Limpeza de Recursos](#limpeza-de-recursos)
 
 ---
 
@@ -92,7 +90,7 @@ A rede é distribuída em **duas Zonas de Disponibilidade**, cada uma com uma su
 
 | Dia | Tema | Documentação |
 |-----|------|--------------|
-| 1 | Construindo a Base | [Dia 1](docs/dia-1/README.md) (concluído) |
+| 1 | Construindo a Base | [Dia 1](docs/dia-1/README.md) |
 | 2 | Segurança e Escalabilidade | [Dia 2](docs/dia-2/README.md) |
 | 3 | Observabilidade e Operação | [Dia 3](docs/dia-3/README.md) |
 
@@ -109,10 +107,10 @@ Guia completo: [docs/dia-1/README.md](docs/dia-1/README.md)
 
 Guia completo: [docs/dia-2/README.md](docs/dia-2/README.md)
 
-- [ ] Parameter Store para remover segredos do código
-- [ ] Session Manager para acesso sem SSH
-- [ ] Launch Templates e Auto Scaling Groups para frontend e backend
-- [ ] CloudFront e Dead Letter Queue (DLQ)
+- [x] Parameter Store para remover segredos do código
+- [x] Session Manager para acesso sem SSH
+- [x] Launch Templates e Auto Scaling Groups para frontend e backend
+- [x] CloudFront e Dead Letter Queue (DLQ)
 
 ### Dia 3 — Observabilidade e Operação
 
@@ -120,12 +118,12 @@ A arquitetura já existe; o foco é operá-la: monitorar, provocar falhas, corri
 
 Guia completo: [docs/dia-3/README.md](docs/dia-3/README.md)
 
-- [ ] CloudWatch Dashboard unificado
-- [ ] Restringir o acesso ao ALB somente via CloudFront
-- [ ] Alertas por e-mail com SNS
-- [ ] Escalabilidade do backend por backlog de mensagens SQS por instância (não por CPU)
-- [ ] Point-in-Time Recovery no DynamoDB
-- [ ] Cost Anomaly Detection
+- [x] CloudWatch Dashboard unificado
+- [x] Restringir o acesso ao ALB somente via CloudFront
+- [x] Alertas por e-mail com SNS
+- [x] Escalabilidade do backend por backlog de mensagens SQS por instância (não por CPU)
+- [x] Point-in-Time Recovery no DynamoDB
+- [x] Cost Anomaly Detection
 
 ## Fluxo da Requisição
 
@@ -174,19 +172,6 @@ edn-aws-architecture-week/
 | Segurança reforçada | Zero segredos no código e acesso sem SSH aberto |
 | Alta disponibilidade | Instâncias substituídas automaticamente em caso de falha |
 | Escalabilidade real | Frontend e backend ajustados à demanda em tempo real |
-
-## Limpeza de Recursos
-
-Ao final, remova os recursos para evitar cobranças, preferencialmente nesta ordem:
-
-1. Distribuição CloudFront (desabilitar e excluir)
-2. Auto Scaling Groups e Launch Templates
-3. Application Load Balancer e Target Groups
-4. Filas SQS (principal e DLQ)
-5. Tabela DynamoDB
-6. NAT Gateways e Elastic IPs
-7. VPC, alarmes do CloudWatch, tópico SNS e parâmetros do Parameter Store
-8. Dashboard do CloudWatch e monitor do Cost Anomaly Detection
 
 ---
 

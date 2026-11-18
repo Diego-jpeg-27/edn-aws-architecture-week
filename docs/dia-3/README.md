@@ -36,7 +36,6 @@ A arquitetura já existe, já escala e já se recupera da queda de uma instânci
    - [12. Point-in-Time Recovery no DynamoDB](#12-point-in-time-recovery-no-dynamodb)
    - [13. Cost Anomaly Detection](#13-cost-anomaly-detection)
 7. [Validação](#validação)
-8. [Limpeza](../../README.md#limpeza-de-recursos)
 
 ---
 
@@ -308,11 +307,15 @@ Com a fila vazia, o Auto Scaling volta para 1 instância.
 
 ### 10. Teste da DLQ com alarme
 
-1. **EC2**: encerre as instâncias do backend.
+Encerrar a instância do backend não basta: o Auto Scaling cria outra, que consome a mensagem antes de ela chegar à DLQ. Por isso o grupo é zerado durante o teste.
+
+1. **EC2** > **Grupos do Auto Scaling** > `asg-backend-<nome>` > **Editar**: capacidade desejada e mínima em `0` > **Atualizar**. Aguarde a instância ser encerrada.
 2. Pelo CloudFront, envie uma mensagem.
 3. **SQS** > `fila-registros-<nome>` > **Enviar e receber mensagens** > **Pesquisar mensagens**, como no [Dia 2](../dia-2/README.md#12-teste-da-dlq). Repita até 3 recebimentos sem processar.
 4. A mensagem vai para a DLQ. Em cerca de 1 minuto chega o e-mail do SNS.
 5. **CloudWatch** > **Alarmes**: `alarm-dlq-<nome>` aparece **Em alarme**.
+6. Volte o `asg-backend-<nome>` para capacidade desejada e mínima `1` e aguarde a instância ficar pronta.
+7. **SQS** > `dlq-registros-<nome>` > **Iniciar redirecionamento da DLQ**, como no [Dia 2](../dia-2/README.md#12-teste-da-dlq). A mensagem volta para a fila principal e é processada. O alarme retorna para **OK**.
 
 ### 11. Teste de CPU no frontend
 
